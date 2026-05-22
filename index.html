@@ -23,76 +23,24 @@
 ```
     :root {
         --bg: #0d0f14;
-        --surface: #1e2330;
-        --surface2: #252936;
-        --border: #3a4255;
-        --header-h: #1e2330;
-        --accent: #5a9dff;
-        --accent2: #ffb366;
-        --accent3: #5fffbb;
-        --accent4: #ff5f8a;
-        --accent5: #b89fff;
-        --text: #ffffff;
-        --text-dim: #c8d0e0;
-        --accent-orange: #ffb366;
+        --surface: #161922;
+        --surface2: #1e2330;
+        --border: #2a3045;
+        --header-h: #1a2035;
+        --accent: #4f8ef7;
+        --accent2: #f7a74f;
+        --accent3: #4ff7b0;
+        --accent4: #f74f7a;
+        --accent5: #a78bfa;
+        --text: #e8ecf5;
+        --text-dim: #8892a4;
     }
 
     body {
         font-family: 'DM Sans', sans-serif;
         background: var(--bg);
-        background-color: #0d0f14 !important;
-        color: #ffffff !important;
+        color: var(--text);
         line-height: 1.6;
-        margin: 0;
-        padding: 0;
-    }
-
-    /* UNIVERSAL VISIBILITY FIX - FORCE EVERYTHING VISIBLE */
-    * {
-        color: #ffffff !important;
-    }
-    
-    /* Force all cards, divs, sections visible */
-    .insight-card, .chart-card, .card, div[class*="card"] {
-        background: #1e2330 !important;
-        border: 1px solid #3a4255 !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    /* Force all buttons visible */
-    button, .btn {
-        background: #4f8ef7 !important;
-        color: #ffffff !important;
-        border: 1px solid #5a9dff !important;
-        opacity: 1 !important;
-        cursor: pointer !important;
-    }
-    
-    /* Force all inputs visible */
-    input, select, textarea {
-        background: #1e2330 !important;
-        color: #ffffff !important;
-        border: 1px solid #3a4255 !important;
-    }
-    
-    /* Force tables visible */
-    table, th, td {
-        border-color: #3a4255 !important;
-        background: #1e2330 !important;
-        color: #ffffff !important;
-    }
-    
-    /* Force sections visible */
-    .section, .main, header {
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-
-    #root {
-        min-height: 100vh;
-        background: var(--bg);
-        background-color: #0d0f14 !important;
     }
 
     header {
@@ -704,7 +652,7 @@
 <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
-    // Cloudflare Worker Backend API
+    // Backend API
     const API_BASE_URL = 'https://ftd-dashboard-backend.anuj-sharma.workers.dev';
 
     const PASSWORD = "Megha@5678";
@@ -758,94 +706,32 @@
             }
         };
 
-        // Backend API Integration Functions
+        // Backend functions
         const saveToBackend = async (reportData, tlReportData, lastUpdated) => {
             try {
-                const response = await fetch(`${API_BASE_URL}/api/save-report`, {
+                await fetch(`${API_BASE_URL}/api/save-report`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        reportData: reportData,
-                        tlReportData: tlReportData,
-                        lastUpdated: lastUpdated
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ reportData, tlReportData, lastUpdated })
                 });
-                
-                const result = await response.json();
-                if (result.success) {
-                    console.log('✅ Data saved to cloud storage');
-                    setStatusBar({ type: 'ok', message: 'Data saved to cloud - visible to all users!' });
-                } else {
-                    console.error('❌ Failed to save:', result.error);
-                }
-            } catch (error) {
-                console.error('❌ Error saving to backend:', error);
-            }
+            } catch (e) { console.log('Save skipped'); }
         };
 
         const loadFromBackend = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}/api/get-report`);
-                const result = await response.json();
-                
-                if (result.success && result.reportData) {
-                    setReportData(result.reportData);
-                    setFilteredUserData(result.reportData);
-                    setTlReportData(result.tlReportData);
-                    setLastUpdated(result.lastUpdated);
+                const res = await fetch(`${API_BASE_URL}/api/get-report`);
+                const data = await res.json();
+                if (data.success && data.reportData) {
+                    setReportData(data.reportData);
+                    setFilteredUserData(data.reportData);
+                    setTlReportData(data.tlReportData);
+                    setLastUpdated(data.lastUpdated);
                     setActiveTab('user-report');
-                    setStatusBar({ type: 'ok', message: '✅ Loaded previous data from cloud storage' });
-                    console.log('✅ Loaded data from cloud storage');
-                } else {
-                    console.log('ℹ️ No previous data available');
                 }
-            } catch (error) {
-                console.log('ℹ️ No previous data available');
-            }
+            } catch (e) { }
         };
 
-        // Auto-load data when dashboard opens
-        useEffect(() => {
-            loadFromBackend();
-            
-            // If no backend data, load sample data for demo
-            setTimeout(() => {
-                if (reportData.length === 0) {
-                    loadSampleData();
-                }
-            }, 2000);
-        }, []);
-
-        // Sample data for demo/preview
-        const loadSampleData = () => {
-            const sampleUsers = [
-                { unit: 'Malad', teamLeader: 'Farhat Shaikh', userCode: '37866', userName: 'Jinal Anil Gupta', activeStatus: 'Active', doj: '27-May-24', totalDial: 299, totalConnectedCalls: 92, totalTalktimeSeconds: 8218, talktimeStatus: 'Above 1 Hr', loginDuration: '08:30:00', netLoginDuration: '08:00:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
-                { unit: 'Malad', teamLeader: 'Sapna Kamble', userCode: '48119', userName: 'Akshay Dhansing Jadhav', activeStatus: 'Active', doj: '30-Sep-24', totalDial: 148, totalConnectedCalls: 67, totalTalktimeSeconds: 8299, talktimeStatus: 'Above 1 Hr', loginDuration: '08:15:00', netLoginDuration: '07:45:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
-                { unit: 'Malad', teamLeader: 'Akash Pardeshi', userCode: '17704', userName: 'Leena Shaikh', activeStatus: 'Active', doj: '15-Jun-20', totalDial: 166, totalConnectedCalls: 68, totalTalktimeSeconds: 8227, talktimeStatus: 'Above 1 Hr', loginDuration: '08:20:00', netLoginDuration: '07:50:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
-                { unit: 'Malad', teamLeader: 'Md Kalim', userCode: '41167', userName: 'Ashish Patel', activeStatus: 'Active', doj: '08-Dec-24', totalDial: 188, totalConnectedCalls: 77, totalTalktimeSeconds: 8218, talktimeStatus: 'Above 1 Hr', loginDuration: '08:25:00', netLoginDuration: '07:55:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
-                { unit: 'Thane', teamLeader: 'Sachin Bodhak', userCode: '27788', userName: 'Rohit Mahajan', activeStatus: 'Active', doj: '30-May-22', totalDial: 48, totalConnectedCalls: 27, totalTalktimeSeconds: 7980, talktimeStatus: 'Above 1 Hr', loginDuration: '08:10:00', netLoginDuration: '07:40:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
-                { unit: 'Malad', teamLeader: 'Arshad Shaikh', userCode: '38974', userName: 'Afsana Khatun Kuddus Shaikh', activeStatus: 'Active', doj: '22-Apr-24', totalDial: 169, totalConnectedCalls: 63, totalTalktimeSeconds: 8042, talktimeStatus: 'Above 1 Hr', loginDuration: '08:18:00', netLoginDuration: '07:48:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
-                { unit: 'HYO', userCode: '23040', userName: 'Vikram More', activeStatus: 'Active', doj: '10-Aug-21', totalDial: 142, totalConnectedCalls: 79, totalTalktimeSeconds: 7843, talktimeStatus: 'Above 1 Hr', loginDuration: '08:12:00', netLoginDuration: '07:42:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
-                { unit: 'Malad', teamLeader: 'Farhat Shaikh', userCode: '12345', userName: 'Sample Agent 1', activeStatus: 'Active', doj: '01-Jan-24', totalDial: 85, totalConnectedCalls: 32, totalTalktimeSeconds: 2100, talktimeStatus: 'Below 1 Hr', loginDuration: '08:00:00', netLoginDuration: '07:30:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
-            ];
-
-            const sampleTL = [
-                { unit: 'Malad', tlName: 'Farhat Shaikh', userCount: 10, totalDial: 1853, totalConnected: 680, totalTT: 60711, avgTT: '01:41:11', totalTTFormatted: '16:51:51' },
-                { unit: 'Malad', tlName: 'Sapna Kamble', userCount: 10, totalDial: 1103, totalConnected: 563, totalTT: 52524, avgTT: '01:27:30', totalTTFormatted: '14:35:24' },
-                { unit: 'Malad', tlName: 'Akash Pardeshi', userCount: 17, totalDial: 1000, totalConnected: 1000, totalTT: 88043, avgTT: '01:26:17', totalTTFormatted: '24:27:23' },
-                { unit: 'Thane', tlName: 'Sachin Bodhak', userCount: 20, totalDial: 2081, totalConnected: 937, totalTT: 82210, avgTT: '01:08:24', totalTTFormatted: '22:50:10' },
-                { unit: 'HYO', tlName: 'Nisha Pillai', userCount: 21, totalDial: 2750, totalConnected: 1254, totalTT: 86401, avgTT: '01:08:33', totalTTFormatted: '24:00:01' },
-            ];
-
-            setReportData(sampleUsers);
-            setFilteredUserData(sampleUsers);
-            setTlReportData(sampleTL);
-            setLastUpdated('21/05/2025 10:30 (Sample Data)');
-            setActiveTab('user-report');
-            setStatusBar({ type: 'ok', message: '📊 Viewing sample data - Upload files to see your actual reports' });
-        };
+        useEffect(() => { loadFromBackend(); }, []);
 
         const handleFileUpload = (file, setFile, setData) => {
             if (!file) return;
@@ -1046,11 +932,9 @@
                 setColumnSorts({});
                 const timestamp = formatDateTime();
                 setLastUpdated(timestamp);
-                setStatusBar({ type: 'ok', message: `✅ Processed ${userReport.length} agents - Saving to cloud...` });
+                setStatusBar({ type: 'ok', message: `Processed ${userReport.length} agents successfully` });
                 setActiveTab('user-report');
                 setProcessing(false);
-
-                // Auto-save to backend
                 saveToBackend(userReport, tlReport, timestamp);
             } catch (err) {
                 setError(`Error: ${err.message}`);
@@ -1220,26 +1104,26 @@
         return (
             <>
                 <header>
-                    <div className="logo" style={{color: '#ffffff'}}>MOTILAL</div>
-                    <div className="page-title" style={{color: '#ffffff'}}>FTD Talk Time Dashboard</div>
-                    <div className="org-name" style={{color: '#ffffff'}}>Megha</div>
+                    <div className="logo">MOTILAL</div>
+                    <div className="page-title">FTD Talk Time Dashboard</div>
+                    <div className="org-name">Megha</div>
                 </header>
 
                 <div className="main">
                     <div className="top-tabs-row">
                         <div className="top-tabs">
-                            <button style={{color: activeTab === 'user-report' ? '#ffffff' : '#8892a4'}} className={`tab ${activeTab === 'user-report' ? 'active' : ''}`} onClick={() => setActiveTab('user-report')} disabled={!reportData.length}>
+                            <button className={`tab ${activeTab === 'user-report' ? 'active' : ''}`} onClick={() => setActiveTab('user-report')} disabled={!reportData.length}>
                                 👤 User-Wise Report
                             </button>
-                            <button style={{color: activeTab === 'tl-report' ? '#ffffff' : '#8892a4'}} className={`tab ${activeTab === 'tl-report' ? 'active' : ''}`} onClick={() => setActiveTab('tl-report')} disabled={!tlReportData.length}>
+                            <button className={`tab ${activeTab === 'tl-report' ? 'active' : ''}`} onClick={() => setActiveTab('tl-report')} disabled={!tlReportData.length}>
                                 👥 TL-Wise Report
                             </button>
-                            <button style={{color: activeTab === 'upload' ? '#ffffff' : '#8892a4'}} className={`tab ${activeTab === 'upload' ? 'active' : ''}`} onClick={() => setActiveTab('upload')}>
+                            <button className={`tab ${activeTab === 'upload' ? 'active' : ''}`} onClick={() => setActiveTab('upload')}>
                                 📂 Upload Files
                             </button>
                         </div>
                         {lastUpdated && (
-                            <div className="last-updated" style={{color: '#c8d0e0'}}>
+                            <div className="last-updated">
                                 Last Updated: {lastUpdated}
                             </div>
                         )}
