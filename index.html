@@ -1142,26 +1142,26 @@
         return (
             <>
                 <header>
-                    <div className="logo">MOTILAL</div>
-                    <div className="page-title">FTD Talk Time Dashboard</div>
-                    <div className="org-name">Megha</div>
+                    <div className="logo" style={{color: '#ffffff'}}>MOTILAL</div>
+                    <div className="page-title" style={{color: '#ffffff'}}>FTD Talk Time Dashboard</div>
+                    <div className="org-name" style={{color: '#ffffff'}}>Megha</div>
                 </header>
 
                 <div className="main">
                     <div className="top-tabs-row">
                         <div className="top-tabs">
-                            <button className={`tab ${activeTab === 'user-report' ? 'active' : ''}`} onClick={() => setActiveTab('user-report')} disabled={!reportData.length}>
+                            <button style={{color: activeTab === 'user-report' ? '#ffffff' : '#8892a4'}} className={`tab ${activeTab === 'user-report' ? 'active' : ''}`} onClick={() => setActiveTab('user-report')} disabled={!reportData.length}>
                                 👤 User-Wise Report
                             </button>
-                            <button className={`tab ${activeTab === 'tl-report' ? 'active' : ''}`} onClick={() => setActiveTab('tl-report')} disabled={!tlReportData.length}>
+                            <button style={{color: activeTab === 'tl-report' ? '#ffffff' : '#8892a4'}} className={`tab ${activeTab === 'tl-report' ? 'active' : ''}`} onClick={() => setActiveTab('tl-report')} disabled={!tlReportData.length}>
                                 👥 TL-Wise Report
                             </button>
-                            <button className={`tab ${activeTab === 'upload' ? 'active' : ''}`} onClick={() => setActiveTab('upload')}>
+                            <button style={{color: activeTab === 'upload' ? '#ffffff' : '#8892a4'}} className={`tab ${activeTab === 'upload' ? 'active' : ''}`} onClick={() => setActiveTab('upload')}>
                                 📂 Upload Files
                             </button>
                         </div>
                         {lastUpdated && (
-                            <div className="last-updated">
+                            <div className="last-updated" style={{color: '#c8d0e0'}}>
                                 Last Updated: {lastUpdated}
                             </div>
                         )}
