@@ -38,16 +38,9 @@
 
     body {
         font-family: 'DM Sans', sans-serif;
-        background: #0d0f14 !important;
-        color: #e8ecf5 !important;
+        background: var(--bg);
+        color: var(--text);
         line-height: 1.6;
-        margin: 0;
-        padding: 0;
-    }
-
-    #root {
-        background: #0d0f14 !important;
-        min-height: 100vh;
     }
 
     header {
@@ -659,10 +652,10 @@
 <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
-    // Backend API
-    const API_BASE_URL = 'https://ftd-dashboard-backend.anuj-sharma.workers.dev';
-
     const PASSWORD = "Megha@5678";
+
+    // Cloudflare Worker Backend
+    const API_BASE_URL = 'https://ftd-dashboard-backend.anuj-sharma.workers.dev';
 
     function App() {
         const [activeTab, setActiveTab] = useState('user-report');
