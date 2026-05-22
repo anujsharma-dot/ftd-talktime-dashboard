@@ -41,20 +41,52 @@
         font-family: 'DM Sans', sans-serif;
         background: var(--bg);
         background-color: #0d0f14 !important;
-        color: var(--text);
+        color: #ffffff !important;
         line-height: 1.6;
         margin: 0;
         padding: 0;
     }
 
-    /* FORCE WHITE TEXT EVERYWHERE */
+    /* UNIVERSAL VISIBILITY FIX - FORCE EVERYTHING VISIBLE */
     * {
         color: #ffffff !important;
     }
-
-    /* Override for specific dim text */
-    .text-dim, .label, .last-updated {
-        color: #c8d0e0 !important;
+    
+    /* Force all cards, divs, sections visible */
+    .insight-card, .chart-card, .card, div[class*="card"] {
+        background: #1e2330 !important;
+        border: 1px solid #3a4255 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* Force all buttons visible */
+    button, .btn {
+        background: #4f8ef7 !important;
+        color: #ffffff !important;
+        border: 1px solid #5a9dff !important;
+        opacity: 1 !important;
+        cursor: pointer !important;
+    }
+    
+    /* Force all inputs visible */
+    input, select, textarea {
+        background: #1e2330 !important;
+        color: #ffffff !important;
+        border: 1px solid #3a4255 !important;
+    }
+    
+    /* Force tables visible */
+    table, th, td {
+        border-color: #3a4255 !important;
+        background: #1e2330 !important;
+        color: #ffffff !important;
+    }
+    
+    /* Force sections visible */
+    .section, .main, header {
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
     #root {
@@ -777,7 +809,43 @@
         // Auto-load data when dashboard opens
         useEffect(() => {
             loadFromBackend();
+            
+            // If no backend data, load sample data for demo
+            setTimeout(() => {
+                if (reportData.length === 0) {
+                    loadSampleData();
+                }
+            }, 2000);
         }, []);
+
+        // Sample data for demo/preview
+        const loadSampleData = () => {
+            const sampleUsers = [
+                { unit: 'Malad', teamLeader: 'Farhat Shaikh', userCode: '37866', userName: 'Jinal Anil Gupta', activeStatus: 'Active', doj: '27-May-24', totalDial: 299, totalConnectedCalls: 92, totalTalktimeSeconds: 8218, talktimeStatus: 'Above 1 Hr', loginDuration: '08:30:00', netLoginDuration: '08:00:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
+                { unit: 'Malad', teamLeader: 'Sapna Kamble', userCode: '48119', userName: 'Akshay Dhansing Jadhav', activeStatus: 'Active', doj: '30-Sep-24', totalDial: 148, totalConnectedCalls: 67, totalTalktimeSeconds: 8299, talktimeStatus: 'Above 1 Hr', loginDuration: '08:15:00', netLoginDuration: '07:45:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
+                { unit: 'Malad', teamLeader: 'Akash Pardeshi', userCode: '17704', userName: 'Leena Shaikh', activeStatus: 'Active', doj: '15-Jun-20', totalDial: 166, totalConnectedCalls: 68, totalTalktimeSeconds: 8227, talktimeStatus: 'Above 1 Hr', loginDuration: '08:20:00', netLoginDuration: '07:50:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
+                { unit: 'Malad', teamLeader: 'Md Kalim', userCode: '41167', userName: 'Ashish Patel', activeStatus: 'Active', doj: '08-Dec-24', totalDial: 188, totalConnectedCalls: 77, totalTalktimeSeconds: 8218, talktimeStatus: 'Above 1 Hr', loginDuration: '08:25:00', netLoginDuration: '07:55:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
+                { unit: 'Thane', teamLeader: 'Sachin Bodhak', userCode: '27788', userName: 'Rohit Mahajan', activeStatus: 'Active', doj: '30-May-22', totalDial: 48, totalConnectedCalls: 27, totalTalktimeSeconds: 7980, talktimeStatus: 'Above 1 Hr', loginDuration: '08:10:00', netLoginDuration: '07:40:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
+                { unit: 'Malad', teamLeader: 'Arshad Shaikh', userCode: '38974', userName: 'Afsana Khatun Kuddus Shaikh', activeStatus: 'Active', doj: '22-Apr-24', totalDial: 169, totalConnectedCalls: 63, totalTalktimeSeconds: 8042, talktimeStatus: 'Above 1 Hr', loginDuration: '08:18:00', netLoginDuration: '07:48:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
+                { unit: 'HYO', userCode: '23040', userName: 'Vikram More', activeStatus: 'Active', doj: '10-Aug-21', totalDial: 142, totalConnectedCalls: 79, totalTalktimeSeconds: 7843, talktimeStatus: 'Above 1 Hr', loginDuration: '08:12:00', netLoginDuration: '07:42:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
+                { unit: 'Malad', teamLeader: 'Farhat Shaikh', userCode: '12345', userName: 'Sample Agent 1', activeStatus: 'Active', doj: '01-Jan-24', totalDial: 85, totalConnectedCalls: 32, totalTalktimeSeconds: 2100, talktimeStatus: 'Below 1 Hr', loginDuration: '08:00:00', netLoginDuration: '07:30:00', totalBreakTime: '00:30:00', bioBreak: '00:05:00', lunchBreak: '00:20:00', tlMeetingBreak: '00:00:00', meetingBreak: '00:00:00', otherBreak: '00:00:00', phoneBreak: '00:00:00', processBreak: '00:05:00', refreshBreak: '00:00:00', teaBreak: '00:00:00', xmlBreak: '00:00:00', totalNonProductiveBreak: '00:25:00', totalProductiveBreak: '00:05:00' },
+            ];
+
+            const sampleTL = [
+                { unit: 'Malad', tlName: 'Farhat Shaikh', userCount: 10, totalDial: 1853, totalConnected: 680, totalTT: 60711, avgTT: '01:41:11', totalTTFormatted: '16:51:51' },
+                { unit: 'Malad', tlName: 'Sapna Kamble', userCount: 10, totalDial: 1103, totalConnected: 563, totalTT: 52524, avgTT: '01:27:30', totalTTFormatted: '14:35:24' },
+                { unit: 'Malad', tlName: 'Akash Pardeshi', userCount: 17, totalDial: 1000, totalConnected: 1000, totalTT: 88043, avgTT: '01:26:17', totalTTFormatted: '24:27:23' },
+                { unit: 'Thane', tlName: 'Sachin Bodhak', userCount: 20, totalDial: 2081, totalConnected: 937, totalTT: 82210, avgTT: '01:08:24', totalTTFormatted: '22:50:10' },
+                { unit: 'HYO', tlName: 'Nisha Pillai', userCount: 21, totalDial: 2750, totalConnected: 1254, totalTT: 86401, avgTT: '01:08:33', totalTTFormatted: '24:00:01' },
+            ];
+
+            setReportData(sampleUsers);
+            setFilteredUserData(sampleUsers);
+            setTlReportData(sampleTL);
+            setLastUpdated('21/05/2025 10:30 (Sample Data)');
+            setActiveTab('user-report');
+            setStatusBar({ type: 'ok', message: '📊 Viewing sample data - Upload files to see your actual reports' });
+        };
 
         const handleFileUpload = (file, setFile, setData) => {
             if (!file) return;
