@@ -386,12 +386,12 @@
     }
 
     .perf-card {
-        background: #161922;
-        padding: 20px;
-        border-radius: 14px;
-        height: 420px;
-        display: flex;
-        flex-direction: column;
+        background: #161922 !important;
+        padding: 20px !important;
+        border-radius: 14px !important;
+        height: 420px !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     .perf-card.chart {
@@ -469,9 +469,10 @@
 
     /* Charts */
     .chart-card {
-        background: #161922;
-        padding: 24px;
-        border-radius: 14px;
+        background: #161922 !important;
+        padding: 24px !important;
+        border-radius: 14px !important;
+        border-left: 4px solid #4f8ef7 !important;
     }
 
     .chart-card h4 {
@@ -484,10 +485,10 @@
 
     /* Table */
     .table-section {
-        background: #161922;
-        padding: 24px;
-        border-radius: 14px;
-        margin-bottom: 24px;
+        background: #161922 !important;
+        padding: 24px !important;
+        border-radius: 14px !important;
+        margin-bottom: 24px !important;
     }
 
     .table-header {
@@ -875,6 +876,9 @@
                     const totalTalktimeSeconds = Math.round(cdrInfo.totalTalktime);
                     const status = totalTalktimeSeconds >= 3600 ? 'Above 1 Hr' : 'Below 1 Hr';
 
+                    const loginSeconds = parseTimeToSeconds(prodInfo['Login-Duration'] || '0');
+                    const loginStatus = loginSeconds >= 1 ? 'Yes' : 'No';
+
                     return {
                         unit: mapRow[mappingUnitCol] || '',
                         teamLeaderName: mapRow[mappingTLCol] || '',
@@ -888,6 +892,7 @@
                         totalTalktime: secondsToTimeFormat(totalTalktimeSeconds),
                         status: status,
                         loginDuration: prodInfo['Login-Duration'] || '0',
+                        loginStatus: loginStatus,
                         netLoginDuration: prodInfo['Net Login Duration'] || '0',
                         totalBreakTime: prodInfo['Total Break Time'] || '0',
                         bioBreak: prodInfo['Bio Break'] || '0',
@@ -1251,7 +1256,7 @@
                                     <div className="perf-card bottom">
                                         <h4>⚠️ Bottom 5 Performers</h4>
                                         <div className="list-container">
-                                            {[...filteredUserData].sort((a, b) => a.totalTalktimeSeconds - b.totalTalktimeSeconds).slice(0, 5).map((agent, idx) => (
+                                            {[...filteredUserData].filter(a => a.totalTalktimeSeconds > 0).sort((a, b) => a.totalTalktimeSeconds - b.totalTalktimeSeconds).slice(0, 5).map((agent, idx) => (
                                                 <div key={idx} className="performer-item bottom">
                                                     <div>
                                                         <div style={{fontSize: '12px', fontWeight: '600', color: 'var(--text)', fontFamily: 'DM Sans'}}>{agent.userName || agent.userCode}</div>
@@ -1350,10 +1355,10 @@
                                                     <th>
                                                         <div className="th-content">
                                                             <span className="th-label">Login</span>
-                                                            <select className="column-sort" value={columnSorts.loginDuration || 'All'} onChange={(e) => setColumnSorts({...columnSorts, loginDuration: e.target.value})}>
+                                                            <select className="column-filter" value={userFilters.loginStatus || 'All'} onChange={(e) => setUserFilters({...userFilters, loginStatus: e.target.value})}>
                                                                 <option>All</option>
-                                                                <option>Low to High</option>
-                                                                <option>High to Low</option>
+                                                                <option>Yes</option>
+                                                                <option>No</option>
                                                             </select>
                                                         </div>
                                                     </th>
