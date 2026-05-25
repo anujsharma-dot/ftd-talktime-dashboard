@@ -52,7 +52,7 @@
 
     header {
         background: #161922;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid #3a4255;
         padding: 16px 32px;
         display: flex;
         align-items: center;
@@ -187,7 +187,7 @@
     }
 
     .modal-box input.error {
-        border-color: var(--accent4);
+        border-color: #f74f7a;
     }
 
     .alert {
@@ -199,8 +199,8 @@
 
     .alert-error {
         background: rgba(247, 79, 122, 0.15);
-        color: var(--accent4);
-        border: 1px solid var(--accent4);
+        color: #f74f7a;
+        border: 1px solid #f74f7a;
     }
 
     .btn {
@@ -221,14 +221,14 @@
     }
 
     .btn-green {
-        background: var(--accent3);
-        color: #4ff7b0;
+        background: #4ff7b0;
+        color: #000;
         width: 100%;
     }
 
     .btn-orange {
-        background: var(--accent2);
-        color: #f7a74f;
+        background: #f7a74f;
+        color: #000;
     }
 
     .btn:hover {
@@ -250,7 +250,7 @@
 
     .upload-zone {
         background: #161922;
-        border: 2px dashed var(--border);
+        border: 2px dashed #3a4255;
         border-radius: 14px;
         padding: 24px;
         text-align: center;
@@ -264,7 +264,7 @@
     }
 
     .upload-zone.done {
-        border-color: var(--accent3);
+        border-color: #4ff7b0;
         background: rgba(79, 247, 176, 0.05);
     }
 
@@ -297,7 +297,7 @@
     .file-badge {
         margin-top: 12px;
         font-size: 11px;
-        color: var(--accent3);
+        color: #4ff7b0;
         font-family: 'Space Mono', monospace;
     }
 
@@ -314,19 +314,19 @@
     .bar.info {
         background: rgba(79, 142, 247, 0.15);
         color: #4f8ef7;
-        border: 1px solid var(--accent);
+        border: 1px solid #4f8ef7;
     }
 
     .bar.ok {
         background: rgba(79, 247, 176, 0.15);
-        color: var(--accent3);
-        border: 1px solid var(--accent3);
+        color: #4ff7b0;
+        border: 1px solid #4ff7b0;
     }
 
     .bar.err {
         background: rgba(247, 79, 122, 0.15);
-        color: var(--accent4);
-        border: 1px solid var(--accent4);
+        color: #f74f7a;
+        border: 1px solid #f74f7a;
     }
 
     /* Insights Cards */
@@ -337,23 +337,26 @@
         margin-bottom: 24px;
     }
 
+    
     .insight-card {
-        background: #161922;
-        padding: 24px;
-        border-radius: 14px;
-        border-left: 4px solid var(--accent);
+        background: #161922 !important;
+        padding: 24px !important;
+        border-radius: 14px !important;
+        border-left: 6px solid #4f8ef7 !important;
+        visibility: visible !important;
+        display: block !important;
     }
 
     .insight-card.green {
-        border-left: 6px solid #4ff7b0;
+        border-left: 6px solid #4ff7b0 !important;
     }
 
     .insight-card.orange {
-        border-left: 6px solid #f7a74f;
+        border-left: 6px solid #f7a74f !important;
     }
 
     .insight-card.red {
-        border-left: 6px solid #f74f7a;
+        border-left: 6px solid #f74f7a !important;
     }
 
     .insight-card h4 {
@@ -385,25 +388,27 @@
         margin-bottom: 24px;
     }
 
+    
     .perf-card {
         background: #161922 !important;
         padding: 20px !important;
-        border-radius: 14px !important; overflow: hidden;
+        border-radius: 14px !important;
         height: 420px !important;
         display: flex !important;
         flex-direction: column !important;
+        visibility: visible !important;
     }
 
     .perf-card.chart {
-        border-left: 4px solid var(--accent);
+        border-left: 6px solid #4f8ef7 !important;
     }
 
     .perf-card.top {
-        border-left: 4px solid var(--accent3);
+        border-left: 6px solid #4ff7b0 !important;
     }
 
     .perf-card.bottom {
-        border-left: 4px solid var(--accent4);
+        border-left: 6px solid #f74f7a !important;
     }
 
     .perf-card h4 {
@@ -441,7 +446,7 @@
     }
 
     .perf-card .list-container::-webkit-scrollbar-thumb {
-        background: var(--border);
+        background: #3a4255;
         border-radius: 3px;
     }
 
@@ -525,7 +530,7 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid #3a4255;
         white-space: nowrap;
         vertical-align: top;
     }
@@ -559,7 +564,7 @@
 
     td {
         padding: 11px 16px;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid #3a4255;
         font-size: 11px;
         font-family: 'Space Mono', monospace;
         color: #e8ecf5;
@@ -567,7 +572,7 @@
     }
 
     tr:hover {
-        background: var(--surface2);
+        background: #1e2330;
     }
 
     .val-num {
@@ -575,7 +580,7 @@
     }
 
     .val-pct {
-        color: var(--accent2);
+        color: #f7a74f;
     }
 
     .status-badge {
@@ -588,13 +593,23 @@
     }
 
     .status-above {
-        background: var(--accent3);
-        color: #4ff7b0;
+        background: #4ff7b0 !important;
+        color: #000000 !important;
+        font-weight: 700 !important;
+        padding: 4px 12px !important;
+        border-radius: 20px !important;
+        display: inline-block !important;
+        visibility: visible !important;
     }
 
     .status-below {
-        background: var(--accent4);
-        color: #fff;
+        background: #f74f7a !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        padding: 4px 12px !important;
+        border-radius: 20px !important;
+        display: inline-block !important;
+        visibility: visible !important;
     }
 
     /* Unit Section for TL Report */
@@ -603,7 +618,7 @@
     }
 
     .unit-header {
-        background: linear-gradient(135deg, var(--accent) 0%, var(--accent5) 100%);
+        background: linear-gradient(135deg, #4f8ef7 0%, #a78bfa 100%);
         color: #fff;
         padding: 16px 24px;
         border-radius: 14px 14px 0 0;
@@ -612,7 +627,7 @@
     }
 
     .unit-table {
-        border: 2px solid var(--accent);
+        border: 2px solid #4f8ef7;
         border-radius: 0 0 14px 14px;
         overflow: hidden;
     }
@@ -1241,13 +1256,13 @@
                                     <div className="perf-card top">
                                         <h4>🏆 Top 5 Performers</h4>
                                         <div className="list-container">
-                                            {[...filteredUserData].sort((a, b) => b.totalTalktimeSeconds - a.totalTalktimeSeconds).slice(0, 5).map((agent, idx) => (
+                                            {[...filteredUserData].filter(a => a.totalTalktimeSeconds > 0).sort((a, b) => b.totalTalktimeSeconds - a.totalTalktimeSeconds).slice(0, 5).map((agent, idx) => (
                                                 <div key={idx} className="performer-item top">
                                                     <div>
-                                                        <div style={{fontSize: '12px', fontWeight: '600', color: 'var(--text)', fontFamily: 'DM Sans'}}>{agent.userName || agent.userCode}</div>
-                                                        <div style={{fontSize: '10px', color: 'var(--text-dim)', fontFamily: 'DM Sans'}}>{agent.teamLeaderName}</div>
+                                                        <div style={{fontSize: '12px', fontWeight: '600', color: '#e8ecf5', fontFamily: 'DM Sans'}}>{agent.userName || agent.userCode}</div>
+                                                        <div style={{fontSize: '10px', color: '#8892a4', fontFamily: 'DM Sans'}}>{agent.teamLeaderName}</div>
                                                     </div>
-                                                    <div style={{fontSize: '12px', fontWeight: '700', color: 'var(--accent3)', fontFamily: 'Space Mono'}}>{agent.totalTalktime}</div>
+                                                    <div style={{fontSize: '12px', fontWeight: '700', color: '#4ff7b0', fontFamily: 'Space Mono'}}>{agent.totalTalktime}</div>
                                                 </div>
                                             ))}
                                         </div>
@@ -1259,10 +1274,10 @@
                                             {[...filteredUserData].filter(a => a.totalTalktimeSeconds > 0).sort((a, b) => a.totalTalktimeSeconds - b.totalTalktimeSeconds).slice(0, 5).map((agent, idx) => (
                                                 <div key={idx} className="performer-item bottom">
                                                     <div>
-                                                        <div style={{fontSize: '12px', fontWeight: '600', color: 'var(--text)', fontFamily: 'DM Sans'}}>{agent.userName || agent.userCode}</div>
-                                                        <div style={{fontSize: '10px', color: 'var(--text-dim)', fontFamily: 'DM Sans'}}>{agent.teamLeaderName}</div>
+                                                        <div style={{fontSize: '12px', fontWeight: '600', color: '#e8ecf5', fontFamily: 'DM Sans'}}>{agent.userName || agent.userCode}</div>
+                                                        <div style={{fontSize: '10px', color: '#8892a4', fontFamily: 'DM Sans'}}>{agent.teamLeaderName}</div>
                                                     </div>
-                                                    <div style={{fontSize: '12px', fontWeight: '700', color: 'var(--accent4)', fontFamily: 'Space Mono'}}>{agent.totalTalktime}</div>
+                                                    <div style={{fontSize: '12px', fontWeight: '700', color: '#f74f7a', fontFamily: 'Space Mono'}}>{agent.totalTalktime}</div>
                                                 </div>
                                             ))}
                                         </div>
@@ -1634,33 +1649,33 @@
                                     </div>
 
                                     {/* Middle: Performance Metrics */}
-                                    <div className="insight-card" style={{padding: '20px', borderLeft: '4px solid var(--accent3)'}}>
+                                    <div className="insight-card" style={{padding: '20px', borderLeft: '4px solid #4ff7b0'}}>
                                         <h4 style={{marginBottom: '20px', fontSize: '11px'}}>📈 PERFORMANCE METRICS</h4>
                                         <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
                                             <div>
-                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '8px'}}>Avg Calls/Agent/TL</div>
-                                                <div style={{fontSize: '28px', fontWeight: '700', fontFamily: 'Space Mono', color: 'var(--text)'}}>
+                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: '#8892a4', marginBottom: '8px'}}>Avg Calls/Agent/TL</div>
+                                                <div style={{fontSize: '28px', fontWeight: '700', fontFamily: 'Space Mono', color: '#e8ecf5'}}>
                                                     {(tlReportData.reduce((s, r) => s + r.totalDial, 0) / tlReportData.reduce((s, r) => s + r.userCount, 0)).toFixed(0)}
                                                 </div>
-                                                <div style={{fontSize: '11px', color: 'var(--text-dim)', marginTop: '4px'}}>Overall efficiency</div>
+                                                <div style={{fontSize: '11px', color: '#8892a4', marginTop: '4px'}}>Overall efficiency</div>
                                             </div>
                                             <div>
-                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '8px'}}>Overall Conn Rate</div>
-                                                <div style={{fontSize: '28px', fontWeight: '700', fontFamily: 'Space Mono', color: 'var(--accent3)'}}>
+                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: '#8892a4', marginBottom: '8px'}}>Overall Conn Rate</div>
+                                                <div style={{fontSize: '28px', fontWeight: '700', fontFamily: 'Space Mono', color: '#4ff7b0'}}>
                                                     {((tlReportData.reduce((s, r) => s + r.totalConnected, 0) / tlReportData.reduce((s, r) => s + r.totalDial, 0)) * 100).toFixed(1)}%
                                                 </div>
-                                                <div style={{fontSize: '11px', color: 'var(--text-dim)', marginTop: '4px'}}>Team performance</div>
+                                                <div style={{fontSize: '11px', color: '#8892a4', marginTop: '4px'}}>Team performance</div>
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* Right: Key Insights */}
-                                    <div className="insight-card" style={{padding: '20px', borderLeft: '4px solid var(--accent2)'}}>
+                                    <div className="insight-card" style={{padding: '20px', borderLeft: '4px solid #f7a74f'}}>
                                         <h4 style={{marginBottom: '20px', fontSize: '11px'}}>📌 KEY INSIGHTS</h4>
                                         <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px'}}>
                                             <div>
-                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '6px'}}>Team Size Variance</div>
-                                                <div style={{fontSize: '20px', fontWeight: '700', fontFamily: 'Space Mono', color: 'var(--text)'}}>
+                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: '#8892a4', marginBottom: '6px'}}>Team Size Variance</div>
+                                                <div style={{fontSize: '20px', fontWeight: '700', fontFamily: 'Space Mono', color: '#e8ecf5'}}>
                                                     {(() => {
                                                         const sizes = tlReportData.map(r => r.userCount);
                                                         const min = Math.min(...sizes);
@@ -1668,18 +1683,18 @@
                                                         return `${min} - ${max}`;
                                                     })()}
                                                 </div>
-                                                <div style={{fontSize: '10px', color: 'var(--text-dim)', marginTop: '2px'}}>Min to Max</div>
+                                                <div style={{fontSize: '10px', color: '#8892a4', marginTop: '2px'}}>Min to Max</div>
                                             </div>
                                             <div>
-                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '6px'}}>Total Connected</div>
-                                                <div style={{fontSize: '20px', fontWeight: '700', fontFamily: 'Space Mono', color: 'var(--text)'}}>
+                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: '#8892a4', marginBottom: '6px'}}>Total Connected</div>
+                                                <div style={{fontSize: '20px', fontWeight: '700', fontFamily: 'Space Mono', color: '#e8ecf5'}}>
                                                     {tlReportData.reduce((s, r) => s + r.totalConnected, 0).toLocaleString()}
                                                 </div>
-                                                <div style={{fontSize: '10px', color: 'var(--text-dim)', marginTop: '2px'}}>All teams</div>
+                                                <div style={{fontSize: '10px', color: '#8892a4', marginTop: '2px'}}>All teams</div>
                                             </div>
                                             <div>
-                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '6px'}}>Weakest Conn %</div>
-                                                <div style={{fontSize: '20px', fontWeight: '700', fontFamily: 'Space Mono', color: 'var(--accent4)'}}>
+                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: '#8892a4', marginBottom: '6px'}}>Weakest Conn %</div>
+                                                <div style={{fontSize: '20px', fontWeight: '700', fontFamily: 'Space Mono', color: '#f74f7a'}}>
                                                     {(() => {
                                                         const worst = [...tlReportData].sort((a, b) => {
                                                             const aRate = (a.totalConnected / a.totalDial) * 100;
@@ -1689,7 +1704,7 @@
                                                         return worst ? ((worst.totalConnected / worst.totalDial) * 100).toFixed(1) + '%' : '-';
                                                     })()}
                                                 </div>
-                                                <div style={{fontSize: '10px', color: 'var(--text-dim)', marginTop: '2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                                                <div style={{fontSize: '10px', color: '#8892a4', marginTop: '2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
                                                     {(() => {
                                                         const worst = [...tlReportData].sort((a, b) => {
                                                             const aRate = (a.totalConnected / a.totalDial) * 100;
@@ -1701,11 +1716,11 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '6px'}}>Total TL Count</div>
-                                                <div style={{fontSize: '20px', fontWeight: '700', fontFamily: 'Space Mono', color: 'var(--text)'}}>
+                                                <div style={{fontSize: '10px', textTransform: 'uppercase', color: '#8892a4', marginBottom: '6px'}}>Total TL Count</div>
+                                                <div style={{fontSize: '20px', fontWeight: '700', fontFamily: 'Space Mono', color: '#e8ecf5'}}>
                                                     {tlReportData.length}
                                                 </div>
-                                                <div style={{fontSize: '10px', color: 'var(--text-dim)', marginTop: '2px'}}>Active leaders</div>
+                                                <div style={{fontSize: '10px', color: '#8892a4', marginTop: '2px'}}>Active leaders</div>
                                             </div>
                                         </div>
                                     </div>
@@ -1719,12 +1734,12 @@
                                             {[...tlReportData].sort((a, b) => b.totalTT - a.totalTT).slice(0, 5).map((tl, idx) => (
                                                 <div key={idx} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', background: 'rgba(79,247,176,0.1)', borderRadius: '6px'}}>
                                                     <div>
-                                                        <div style={{fontSize: '13px', fontWeight: '600', color: 'var(--text)', fontFamily: 'DM Sans'}}>{tl.tlName}</div>
-                                                        <div style={{fontSize: '10px', color: 'var(--text-dim)', fontFamily: 'DM Sans'}}>{tl.unit} • {tl.userCount} agents</div>
+                                                        <div style={{fontSize: '13px', fontWeight: '600', color: '#e8ecf5', fontFamily: 'DM Sans'}}>{tl.tlName}</div>
+                                                        <div style={{fontSize: '10px', color: '#8892a4', fontFamily: 'DM Sans'}}>{tl.unit} • {tl.userCount} agents</div>
                                                     </div>
                                                     <div style={{textAlign: 'right'}}>
-                                                        <div style={{fontSize: '13px', fontWeight: '700', color: 'var(--accent3)', fontFamily: 'Space Mono'}}>{tl.totalTTFormatted}</div>
-                                                        <div style={{fontSize: '10px', color: 'var(--text-dim)', fontFamily: 'Space Mono'}}>{tl.avgTT} avg</div>
+                                                        <div style={{fontSize: '13px', fontWeight: '700', color: '#4ff7b0', fontFamily: 'Space Mono'}}>{tl.totalTTFormatted}</div>
+                                                        <div style={{fontSize: '10px', color: '#8892a4', fontFamily: 'Space Mono'}}>{tl.avgTT} avg</div>
                                                     </div>
                                                 </div>
                                             ))}
@@ -1737,12 +1752,12 @@
                                             {[...tlReportData].sort((a, b) => a.totalTT - b.totalTT).slice(0, 5).map((tl, idx) => (
                                                 <div key={idx} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', background: 'rgba(247,79,122,0.1)', borderRadius: '6px'}}>
                                                     <div>
-                                                        <div style={{fontSize: '13px', fontWeight: '600', color: 'var(--text)', fontFamily: 'DM Sans'}}>{tl.tlName}</div>
-                                                        <div style={{fontSize: '10px', color: 'var(--text-dim)', fontFamily: 'DM Sans'}}>{tl.unit} • {tl.userCount} agents</div>
+                                                        <div style={{fontSize: '13px', fontWeight: '600', color: '#e8ecf5', fontFamily: 'DM Sans'}}>{tl.tlName}</div>
+                                                        <div style={{fontSize: '10px', color: '#8892a4', fontFamily: 'DM Sans'}}>{tl.unit} • {tl.userCount} agents</div>
                                                     </div>
                                                     <div style={{textAlign: 'right'}}>
-                                                        <div style={{fontSize: '13px', fontWeight: '700', color: 'var(--accent4)', fontFamily: 'Space Mono'}}>{tl.totalTTFormatted}</div>
-                                                        <div style={{fontSize: '10px', color: 'var(--text-dim)', fontFamily: 'Space Mono'}}>{tl.avgTT} avg</div>
+                                                        <div style={{fontSize: '13px', fontWeight: '700', color: '#f74f7a', fontFamily: 'Space Mono'}}>{tl.totalTTFormatted}</div>
+                                                        <div style={{fontSize: '10px', color: '#8892a4', fontFamily: 'Space Mono'}}>{tl.avgTT} avg</div>
                                                     </div>
                                                 </div>
                                             ))}
